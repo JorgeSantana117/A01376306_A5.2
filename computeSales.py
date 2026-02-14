@@ -1,6 +1,23 @@
 import sys
 import time
 import json
+import os
+
+def load_json_file(file_path):
+    """
+    Loads a JSON file and handles potential errors.
+    Returns the data if successful, or None if an error occurs.
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' was not found.")
+    except json.JSONDecodeError:
+        print(f"Error: The file '{file_path}' contains invalid JSON format.")
+    except Exception as e:
+        print(f"An unexpected error occurred while reading '{file_path}': {e}")
+    return None
 
 def main():
     # Start the timer
@@ -11,23 +28,27 @@ def main():
         print("Usage: python computeSales.py priceCatalogue.json salesRecord.json")
         return
 
-    price_file = sys.argv[1]
-    sales_file = sys.argv[2]
+    price_file_path = sys.argv[1]
+    sales_file_path = sys.argv[2]
 
-    print(f"--- Execution Started ---")
-    print(f"Loading Catalogue: {price_file}")
-    print(f"Loading Sales Record: {sales_file}")
+    # Loading Data
+    print(f"--- Processing Files ---")
     
-    # Placeholder for total
-    total_cost = 0.0
+    catalogue_data = load_json_file(price_file_path)
+    sales_data = load_json_file(sales_file_path)
 
-    # Calculate elapsed time
-    end_time = time.time()
-    elapsed_time = end_time - start_time
+    # If either file failed to load, we cannot proceed with calculations
+    if catalogue_data is None or sales_data is None:
+        print("Execution halted due to file errors.")
+        return
+
+    # --- Verification Step ---
+    print(f"Success: Loaded {len(catalogue_data)} items from catalogue.")
+    print(f"Success: Loaded {len(sales_data)} sales records.")
 
     # Final Output Display
+    elapsed_time = time.time() - start_time
     print("\n" + "="*30)
-    print(f"TOTAL SALES COST: ${total_cost:,.2f}")
     print(f"Execution Time: {elapsed_time:.4f} seconds")
     print("="*30)
 
