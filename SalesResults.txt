@@ -1,12 +1,12 @@
-========================================
-          SALES EXECUTION REPORT
-========================================
-Catalogue File:    priceCatalogue.json
-Sales Record File: salesRecord.json
-----------------------------------------
-Total Sales Items: 3
-Total Cost:        $2,305.98
-Execution Time:    0.010413 seconds
-========================================
+==================================================
+             SALES EXECUTION REPORT
+==================================================
+Catalogue:      priceCatalogue.json
+Sales Record:   salesRecord.json
+--------------------------------------------------
+Total Items:    3
+Total Cost:     $2,305.98
+Time Elapsed:   0.000000 seconds
+==================================================
 
-Notes: 1 errors encountered during processing.
+Issues encountered: 1
